@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmos Odyssey: A Journey Through the Universe</title>
+  <meta name="description" content="Leave Earth behind. An immersive scroll journey through asteroids, gaseous giants, and the event horizon.">
+  
+  <!-- Favicons (Cosmic Odyssey High-Tech Vector Insignia) -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="alternate icon" href="images/favicon.svg">
+  <link rel="apple-touch-icon" href="images/favicon.svg">
+  
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cosmos Odyssey: A Journey Through the Universe">
+  <meta property="og:description" content="Leave Earth behind. An immersive scroll journey through asteroids, gaseous giants, and the event horizon.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cosmos Odyssey: A Journey Through the Universe">
+  <meta name="twitter:description" content="Leave Earth behind. An immersive scroll journey through asteroids, gaseous giants, and the event horizon.">
+
+  <!-- Google Fonts: Orbitron, Exo 2, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Starfield & Texture Grain -->
+  <canvas id="starfield-canvas"></canvas>
+  <div class="cosmic-grain"></div>
+
+  <!-- Telemetry HUD Indicator with Futuristic Vector Icons -->
+  <div class="telemetry-hud" id="telemetry-hud">
+    <div class="telemetry-item">
+      <span class="telemetry-label">
+        <svg class="hud-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        ALTITUDE
+      </span>
+      <span class="telemetry-val" id="tel-altitude">400 KM</span>
+    </div>
+    <div class="telemetry-divider"></div>
+    <div class="telemetry-item">
+      <span class="telemetry-label">
+        <svg class="hud-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        VELOCITY
+      </span>
+      <span class="telemetry-val" id="tel-velocity">28,400 KM/H</span>
+    </div>
+    <div class="telemetry-divider"></div>
+    <div class="telemetry-item">
+      <span class="telemetry-label">
+        <svg class="hud-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.07 4.93a10 10 0 0 0-14.14 0"></path>
+          <path d="M22.6 1.4a15 15 0 0 0-21.2 0"></path>
+        </svg>
+        WARP FACTOR
+      </span>
+      <span class="telemetry-val" id="tel-warp">1.000 G</span>
+    </div>
+  </div>
+
+  <!-- Chapter Progression Side Indicator -->
+  <nav class="chapter-indicator" aria-label="Chapter Navigation">
+    <div class="chapter-dot active" data-target="departure" data-label="01 // DEPARTURE">
+      <svg class="dot-hover-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+      </svg>
+    </div>
+    <div class="chapter-dot" data-target="belt" data-label="02 // ASTEROID BELT">
+      <svg class="dot-hover-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+    </div>
+    <div class="chapter-dot" data-target="giants" data-label="03 // GASEOUS GIANTS">
+      <svg class="dot-hover-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="7"></circle>
+        <ellipse cx="12" cy="12" rx="11" ry="3.5" transform="rotate(-22 12 12)"></ellipse>
+      </svg>
+    </div>
+    <div class="chapter-dot" data-target="horizon" data-label="04 // EVENT HORIZON">
+      <svg class="dot-hover-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <circle cx="12" cy="12" r="9" stroke-dasharray="2 3"></circle>
+      </svg>
+    </div>
+  </nav>
+
+  <!-- Main Website Container -->
+  <div id="main">
+    <div class="page-wrapper">
+
+      <!-- ===================================================================
+           CHAPTER 01: DEPARTURE (Leave Earth Behind)
+           =================================================================== -->
+      <section class="section-departure" id="departure">
+        
+        <!-- Header / Mission Masthead -->
+        <header class="mission-masthead">
+          <a href="#departure" class="brand-title">
+            <svg class="brand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9.5" stroke="#66e8ff" stroke-width="1.4" opacity="0.85" />
+              <ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(-30 12 12)" stroke="#9866ff" stroke-width="1.3" />
+              <circle cx="12" cy="12" r="2.2" fill="#edf4ff" />
+              <circle cx="18" cy="8" r="1.2" fill="#66e8ff" />
+            </svg>
+            <span>COSMOS / ODYSSEY</span>
+          </a>
+          <div class="masthead-right">
+            <span class="masthead-subtitle hidden-mobile">AN INTERSTELLAR EXPERIENCE &nbsp;/&nbsp; 2026</span>
+            <button class="audio-toggle-btn" id="audio-toggle" title="Toggle Cosmic Ambient Drone">
+              <svg class="audio-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+              <span class="sound-waves">
+                <span class="sound-wave-bar"></span>
+                <span class="sound-wave-bar"></span>
+                <span class="sound-wave-bar"></span>
+              </span>
+              <span class="audio-label">AUDIO OFF</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Departure Hero Section with 3D Astronaut Parallax Rig -->
+        <div class="departure-composition" id="hero-composition">
+          
+          <!-- 3D Multi-Layer Parallax Rig for Astronaut -->
+          <div class="astronaut-parallax-rig" id="astronaut-parallax-rig">
+            <!-- Dynamic Cosmic Backlight Aura (Follows Cursor & Glows) -->
+            <div class="astronaut-aura-glow" id="astronaut-aura"></div>
+
+            <!-- Floating Stardust Particles at Differential Parallax Depths -->
+            <div class="space-dust dust-deep" style="top: 15%; right: 48%;"></div>
+            <div class="space-dust dust-deep" style="top: 65%; right: 12%;"></div>
+            <div class="space-dust dust-mid" style="top: 30%; right: 30%;"></div>
+            <div class="space-dust dust-mid" style="top: 75%; right: 60%;"></div>
+            <div class="space-dust dust-near" style="top: 20%; right: 18%;"></div>
+            <div class="space-dust dust-near" style="top: 85%; right: 38%;"></div>
+
+            <!-- Floating Astronaut Image Layer -->
+            <div class="floating-astronaut-container" id="astronaut-container" data-framer-name="Floating Astronaut">
+              <img src="images/astronaut.jpg" alt="Cosmic Astronaut Floating Above Earth" class="floating-astronaut-img" id="astronaut-img" loading="eager">
+            </div>
+          </div>
+
+          <!-- Hero Foreground Content Layer -->
+          <div class="hero-text-content" id="hero-text">
+            <p class="preset-tag hero-tag">
+              <svg class="tag-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="22" y1="12" x2="18" y2="12"></line>
+                <line x1="6" y1="12" x2="2" y2="12"></line>
+                <line x1="12" y1="6" x2="12" y2="2"></line>
+                <line x1="12" y1="22" x2="12" y2="18"></line>
+              </svg>
+              <span>01 / DEPARTURE &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; 400 KM ABOVE HOME</span>
+            </p>
+            <h1 class="preset-h2 hero-title">Leave Earth Behind</h1>
+            <p class="preset-desc hero-description">Beyond the familiar. Beyond the possible. A journey into the beautiful unknown.</p>
+
+            <a href="#belt" class="btn-begin-odyssey" id="begin-journey-btn">
+              <span>BEGIN THE ODYSSEY</span>
+              <svg class="btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <p class="preset-tag hero-footer-note">
+              <svg class="scroll-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+              </svg>
+              <span>SCROLL TO EXPLORE &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; FOUR CHAPTERS. ONE INFINITE UNIVERSE.</span>
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 02: THE ASTEROID BELT (The Inner Frontier)
+           =================================================================== -->
+      <section class="section-asteroid-belt" id="belt">
+        
+        <!-- Drifting Asteroid Fragments -->
+        <div class="fragment-near" data-framer-name="Near Asteroid"></div>
+        <div class="fragment-drifting" data-framer-name="Drifting Fragment"></div>
+        <div class="fragment-fast-foreground" data-framer-name="Fast Foreground Fragment"></div>
+        <div class="fragment-far-orbit" data-framer-name="Far Orbit Fragment"></div>
+        <div class="fragment-distant" data-framer-name="Distant Fragment"></div>
+
+        <!-- Central Interactive Asteroid Canvas / Stage -->
+        <div class="central-asteroid-stage" id="asteroid-stage" title="Click or move mouse to trigger surface shockwaves">
+          <img src="images/asteroid.png" alt="Asteroid Fragment in Deep Space" class="asteroid-texture-overlay" id="asteroid-img" loading="lazy">
+        </div>
+
+        <div class="asteroid-content">
+          <p class="preset-tag">
+            <svg class="tag-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>02 / THE INNER FRONTIER</span>
+          </p>
+          <h2 class="preset-h2">The Asteroid Belt</h2>
+          <p class="preset-desc">A billion ancient fragments. A silent, restless dance. Navigate the remnants of worlds that never were.</p>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 03: GASEOUS GIANTS (Worlds Without Edges)
+           =================================================================== -->
+      <section class="section-gaseous-giants" id="giants">
+        
+        <div class="giants-header">
+          <p class="preset-tag">
+            <svg class="tag-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="7"></circle>
+              <ellipse cx="12" cy="12" rx="11" ry="3.5" transform="rotate(-22 12 12)"></ellipse>
+            </svg>
+            <span>03 / WORLDS WITHOUT EDGES</span>
+          </p>
+          <h2 class="preset-h2 giants-title">Gaseous Giants</h2>
+          <p class="preset-desc giants-desc">Slow down. In the realm of giants, storms outlive civilizations and gravity writes its own rules.</p>
+        </div>
+
+        <!-- Planet System & Orbital Rings -->
+        <div class="planet-system-container">
+          <div class="rotating-gas-giant" data-framer-name="Rotating Gas Giant">
+            <img src="images/gas_giant_texture.png" alt="Gaseous Giant Atmosphere Texture" class="planet-texture">
+          </div>
+          <div class="electric-orbital-ring" data-framer-name="Electric Orbital Ring"></div>
+          <div class="cyan-outer-orbit" data-framer-name="Cyan Outer Orbit"></div>
+        </div>
+
+        <!-- Spacetime Gravitational Mesh Canvas (Framer GLSL Raymarcher) -->
+        <div class="mesh-canvas-container">
+          <canvas id="mesh-canvas"></canvas>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           CHAPTER 04: THE EVENT HORIZON (The Point of No Return)
+           =================================================================== -->
+      <section class="section-event-horizon" id="horizon">
+        
+        <div class="horizon-content">
+          <p class="preset-tag">
+            <svg class="tag-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <circle cx="12" cy="12" r="9" stroke-dasharray="2 3"></circle>
+            </svg>
+            <span>04 / THE POINT OF NO RETURN</span>
+          </p>
+          <h2 class="preset-h2">The Event Horizon</h2>
+          <p class="preset-desc">Where light falls silent. Where time comes undone. Everything leads to the unknown.</p>
+        </div>
+
+        <!-- Black Hole Singularity Stage -->
+        <div class="black-hole-stage">
+          <div class="black-hole-singularity" id="black-hole" data-framer-name="Black Hole">
+            <img src="images/black_hole_desktop.png" alt="Accretion Disk Swirling Around Singularity" class="black-hole-desktop-img">
+          </div>
+          <div class="accretion-light-lens" data-framer-name="Accretion Light"></div>
+        </div>
+
+        <!-- Journey Footer -->
+        <footer class="journey-footer">
+          <div class="footer-brand-wrap">
+            <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9.5" stroke="#66e8ff" stroke-width="1.4" opacity="0.8" />
+              <ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(-30 12 12)" stroke="#9866ff" stroke-width="1.3" />
+              <circle cx="12" cy="12" r="2.2" fill="#edf4ff" />
+            </svg>
+            <p class="footer-brand">COSMOS ODYSSEY</p>
+          </div>
+          <p class="footer-quote">THE UNIVERSE HAS NO END. NEITHER DOES CURIOSITY.</p>
+          <button class="footer-back-to-top" id="back-to-top">
+            <span>LAUNCH AGAIN</span>
+            <svg class="launch-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </button>
+        </footer>
+
+      </section>
+
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

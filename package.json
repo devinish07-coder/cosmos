@@ -1,0 +1,21 @@
+{
+  "name": "cosmos-odyssey",
+  "version": "1.0.0",
+  "description": "Cosmos Odyssey: A Journey Through the Universe - High-fidelity Framer Replication",
+  "main": "index.html",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "cosmos",
+    "odyssey",
+    "framer",
+    "replication",
+    "space",
+    "webgl",
+    "shaders"
+  ],
+  "author": "",
+  "license": "ISC"
+}

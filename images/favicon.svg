@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="spaceGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0c1626" />
+      <stop offset="70%" stop-color="#050811" />
+      <stop offset="100%" stop-color="#020306" />
+    </radialGradient>
+    <radialGradient id="singularityGlow" cx="50%" cy="50%" r="48%">
+      <stop offset="0%" stop-color="#66e8ff" stop-opacity="0.9" />
+      <stop offset="35%" stop-color="#9866ff" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#140f2b" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="orbitGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66e8ff" />
+      <stop offset="45%" stop-color="#b693ff" />
+      <stop offset="85%" stop-color="#9866ff" />
+      <stop offset="100%" stop-color="#66e8ff" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="neon" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Deep Cosmos Background Container -->
+  <rect width="64" height="64" rx="16" fill="url(#spaceGrad)" />
+  <rect width="64" height="64" rx="16" stroke="rgba(102, 232, 255, 0.3)" stroke-width="1.2" />
+
+  <!-- Gravitational Glow -->
+  <circle cx="32" cy="32" r="22" fill="url(#singularityGlow)" />
+
+  <!-- Outer Orbital Ring 1 (Tilted -28 deg) -->
+  <ellipse cx="32" cy="32" rx="23" ry="8" stroke="url(#orbitGlow)" stroke-width="2" transform="rotate(-28 32 32)" filter="url(#neon)" />
+
+  <!-- Inner Cyan Counter-Orbit Ring (Tilted 35 deg) -->
+  <ellipse cx="32" cy="32" rx="17" ry="5.5" stroke="rgba(102, 232, 255, 0.45)" stroke-width="1.2" stroke-dasharray="3 2" transform="rotate(35 32 32)" />
+
+  <!-- Central Black Hole Singularity -->
+  <circle cx="32" cy="32" r="10.5" fill="#020306" stroke="#b693ff" stroke-width="1.8" filter="url(#neon)" />
+  <circle cx="32" cy="32" r="9" fill="#000000" />
+
+  <!-- Luminous Photon Core -->
+  <circle cx="32" cy="32" r="3.2" fill="#edf4ff" filter="url(#neon)" />
+
+  <!-- Orbiting Quantum Sparks -->
+  <circle cx="48" cy="22" r="1.8" fill="#66e8ff" filter="url(#neon)" />
+  <circle cx="16" cy="41" r="1.2" fill="#b693ff" />
+  <circle cx="42" cy="44" r="1" fill="#edf4ff" opacity="0.8" />
+</svg>
